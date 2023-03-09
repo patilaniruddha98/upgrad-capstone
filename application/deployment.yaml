@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind : Deployment
+metadata:
+  name: hello-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      batch: c38
+  template:
+    metadata:
+      name: hello-app
+      labels:
+        batch: c38
+    spec:
+      containers:
+      - name: hello-app
+        image: 186313464150.dkr.ecr.us-east-1.amazonaws.com/capstone:latest
+        ports:
+            - name: tcp
+              containerPort: 8082
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: stateless
+          effect: NoSchedule
